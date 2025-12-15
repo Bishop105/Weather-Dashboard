@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import MainDashboard from './components/MainDashboard';
-import reportWebVitals from './reportWebVitals';
 
 function App() {
   const [city, setCity] = useState('');
@@ -67,5 +66,4 @@ function App() {
   );
 }
 
-reportWebVitals();
 export default App;
