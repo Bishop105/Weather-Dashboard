@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import LandingPage from './components/LandingPage';
 import MainDashboard from './components/MainDashboard';
 
@@ -7,12 +8,12 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState('');
   const [isLanding, setIsLanding] = useState(true);
-  const [selectedDate, setSelectedDate] = useState(new Date()); // Added calendar date
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
 
   // Fetch weather whenever city or selectedDate changes
   useEffect(() => {
-    if (!city) return; // Only fetch if a city is entered
+    if (!city) return;
 
     const fetchWeather = async () => {
       setError('');
@@ -37,32 +38,47 @@ function App() {
     fetchWeather();
   }, [city, selectedDate]);
 
-  // Function to handle manual fetch (e.g., from a button in MainDashboard)
   const handleFetchWeather = () => {
     if (!city) {
       setError('Please enter a city');
       return;
     }
-    setSelectedDate(new Date()); // Triggers useEffect to fetch
+    setSelectedDate(new Date());
   };
 
   return (
-    <div>
+    <AnimatePresence mode="wait">
       {isLanding ? (
-        <LandingPage onGetStarted={() => setIsLanding(false)} />
+        <motion.div
+          key="landing"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -30 }}
+          transition={{ duration: 0.6, ease: 'easeInOut' }}
+        >
+          <LandingPage onGetStarted={() => setIsLanding(false)} />
+        </motion.div>
       ) : (
-        <MainDashboard
-          city={city}
-          setCity={setCity}
-          fetchWeather={handleFetchWeather} // Pass updated fetch function
-          weatherData={weatherData}
-          error={error}
-          loading={loading}
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate} // Pass date state for calendar
-        />
+        <motion.div
+          key="dashboard"
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
+          <MainDashboard
+            city={city}
+            setCity={setCity}
+            fetchWeather={handleFetchWeather}
+            weatherData={weatherData}
+            error={error}
+            loading={loading}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
+        </motion.div>
       )}
-    </div>
+    </AnimatePresence>
   );
 }
 
