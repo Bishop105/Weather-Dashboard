@@ -74,7 +74,7 @@ const Forecast = ({ forecastData, selectedDate, setSelectedDate }) => {
                   })}
                 </h3>
 
-                {/* ✅ STATIC ICON — FIXED SIZE & CENTERED */}
+                {/*  STATIC ICON — FIXED SIZE & CENTERED */}
                 <img
                   className="mx-auto w-14 h-14 drop-shadow-lg"
                   src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`}
@@ -143,7 +143,7 @@ const Forecast = ({ forecastData, selectedDate, setSelectedDate }) => {
                 >
                   <p className="text-sm font-semibold">{time}</p>
 
-                  {/* ✅ FIXED ICON — STANDS OUT */}
+                  {/*  FIXED ICON — STANDS OUT */}
                   <img
                     className="mx-auto w-12 h-12 drop-shadow-xl"
                     src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`}

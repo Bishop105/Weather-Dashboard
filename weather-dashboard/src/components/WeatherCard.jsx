@@ -33,7 +33,7 @@ const WeatherCard = ({ weatherData, selectedDate }) => {
         {weatherData.city.name}
       </h2>
 
-      {/* ✅ STATIC WEATHER ICON */}
+      {/* STATIC WEATHER ICON */}
       <img
        className="mx-auto my-4 w-24 h-24 transition-transform duration-300 hover:scale-110 drop-shadow-xl"
         src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}

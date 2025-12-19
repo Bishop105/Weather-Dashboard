@@ -59,7 +59,7 @@ const LandingPage = ({ onGetStarted }) => {
           Welcome to the Weather Dashboard! Get real-time weather updates for your city.
         </p>
 
-        {/* ✅ GET STARTED BUTTON WITH LIGHT & DARK HOVER */}
+        {/*  GET STARTED BUTTON WITH LIGHT & DARK HOVER */}
         <button
           onClick={onGetStarted}
           className={`

@@ -32,7 +32,7 @@ const MainDashboard = () => {
 
   const fetchWeather = async (cityName) => {
     try {
-      // Example fetch, replace with your actual API
+      //  fetch API
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=ea340323c3d0fffbd3c06bbcfc9ab0b9`
       );
