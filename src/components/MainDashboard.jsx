@@ -32,9 +32,9 @@ const MainDashboard = () => {
 
   const fetchWeather = async (cityName) => {
     try {
-      //  fetch API
+      // Fetch API
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=ea340323c3d0fffbd3c06bbcfc9ab0b9`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       );
       const data = await response.json();
       if (data.cod !== "200") {
