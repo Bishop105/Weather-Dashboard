@@ -5,7 +5,6 @@ import WeatherCard from "./WeatherCard";
 import ErrorMessage from "./ErrorMessage";
 import MyCalendar from "./Calendar";
 import Forecast from "./Forecast";
-import { FaTwitter, FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const MainDashboard = () => {
   const getInitialTheme = () => {
