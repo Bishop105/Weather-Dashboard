@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import SearchBar from "./SearchBar";
-import WeatherCard from "./WeatherCard";
 import ErrorMessage from "./ErrorMessage";
-import MyCalendar from "./Calendar";
-import Forecast from "./Forecast";
 
+// Lazy load heavier components
+const WeatherCard = lazy(() => import("./WeatherCard"));
+const Forecast = lazy(() => import("./Forecast"));
+const MyCalendar = lazy(() => import("./Calendar"));
 
 const MainDashboard = () => {
   const getInitialTheme = () => {
@@ -32,7 +33,6 @@ const MainDashboard = () => {
 
   const fetchWeather = async (cityName) => {
     try {
-      // Fetch API
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       );
@@ -63,7 +63,7 @@ const MainDashboard = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
-      transition={{ duration: 0.6, ease: "easeInOut" }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
       className="relative flex flex-col min-h-screen bg-cover bg-center bg-no-repeat transition-all duration-300"
       style={{ backgroundImage: "url('/images/dashboard-bg.jpg')" }}
     >
@@ -109,25 +109,16 @@ const MainDashboard = () => {
             </p>
           )}
 
-          {weatherData && (
-            <>
-              <WeatherCard
-                weatherData={weatherData}
-                selectedDate={selectedDate}
-              />
-
-              <Forecast
-                forecastData={weatherData}
-                selectedDate={selectedDate}
-                setSelectedDate={setSelectedDate}
-              />
-
-              <MyCalendar
-                selectedDate={selectedDate}
-                setSelectedDate={setSelectedDate}
-              />
-            </>
-          )}
+          {/* Lazy load heavy components */}
+          <Suspense fallback={<div className="text-xl text-gray-200">Loading weather details...</div>}>
+            {weatherData && (
+              <>
+                <WeatherCard weatherData={weatherData} selectedDate={selectedDate} />
+                <Forecast forecastData={weatherData} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+                <MyCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+              </>
+            )}
+          </Suspense>
         </main>
       </div>
     </motion.div>
