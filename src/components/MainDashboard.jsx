@@ -71,22 +71,30 @@ const MainDashboard = () => {
         className={`flex flex-col min-h-screen transition-colors duration-300
           ${darkMode ? "bg-black/60" : "bg-black/40"}`}
       >
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="fixed top-6 right-6 z-50
-            bg-white/80 dark:bg-gray-700/80
-            px-4 py-2 rounded-full
-            text-black dark:text-white font-semibold
-            hover:bg-white hover:text-black
-            dark:hover:bg-white dark:hover:text-black
-            backdrop-blur-md
-            shadow-lg
-            transition-all duration-300"
-        >
-          {darkMode ? "☀ Switch to Light" : "🌙 Switch to Dark"}
-        </button>
+       <button
+  onClick={() => setDarkMode(!darkMode)}
+  className="
+    fixed top-4 right-4 z-50
+    bg-white/80 dark:bg-gray-700/80
+    px-3 py-2 rounded-full
+    text-sm md:text-base
+    text-black dark:text-white font-semibold
+    hover:bg-white hover:text-black
+    dark:hover:bg-white dark:hover:text-black
+    backdrop-blur-md
+    shadow-lg
+    transition-all duration-300
+  "
+>
+  {darkMode ? "☀" : "🌙"}
+<span className="hidden md:inline">
+  {darkMode ? " Switch to Light" : " Switch to Dark"}
+</span>
 
-        <main className="flex-grow flex flex-col items-center px-4 py-6 space-y-4 text-white">
+</button>
+
+
+        <main className="flex-grow flex flex-col items-center px-4 pt-28 pb-6 py-6 space-y-4 text-white">
           <h1 className="text-4xl font-bold mb-6">Weather Dashboard</h1>
 
           <SearchBar
